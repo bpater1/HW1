@@ -22,26 +22,16 @@ def optimize_mrna_sequence(amino_acid_sequence):
         "Y": ["UAU", "UAC"],
     }
 
-    def find_optimal_codon(amino_acid):
-        codons = codon_table.get(amino_acid, [""])  # Use an empty string as a fallback
-        codons.sort(key=lambda codon: (-codon.count("C"), -codon.count("G"), codon))
-        return codons[0]
-
-    # Convert the input amino acid sequence to uppercase
-    amino_acid_sequence = amino_acid_sequence.upper()
-
-    mrna_sequence = ""
+    optimized_mrna = ""
     for amino_acid in amino_acid_sequence:
-        if amino_acid in codon_table:
-            mrna_sequence += find_optimal_codon(amino_acid)
+        codons = codon_table.get(amino_acid, [""])  # Get possible codons for the amino acid
+        # Choose the codon that maximizes Cs and Gs
+        optimal_codon = max(codons, key=lambda codon: codon.count("C") + codon.count("G"))
+        optimized_mrna += optimal_codon
 
-    return mrna_sequence
+    return optimized_mrna
 
-import sys
-
-# Read input amino acid sequence
-amino_acid_sequence = sys.stdin.readline().strip()
-
-# Generate and print the optimized mRNA sequence
-mRNA_sequence = optimize_mrna_sequence(amino_acid_sequence)
-sys.stdout.write(f'{mRNA_sequence}\n')
+if __name__ == "__main__":
+    amino_acid_sequence = input()
+    mRNA_sequence = optimize_mrna_sequence(amino_acid_sequence)
+    print(mRNA_sequence)

@@ -20,7 +20,7 @@ def most_frequent_substring(dna):
 
 import sys
 
-dna_string = sys.stdin.readline().strip()
+dna_string = input().strip()
 indices = most_frequent_substring(dna_string)
 indices.sort()
-sys.stdout.write(','.join(map(str, indices)) + '\n')
+print(','.join(map(str, indices)))

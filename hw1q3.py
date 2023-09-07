@@ -11,7 +11,4 @@ if __name__ == "__main__":
     dna_input = input()
     dna_cleaned = ''.join(base for base in dna_input if base in 'ACTG')
     transcribed = transcription(dna_cleaned)
-
-    # Add dashes between every three characters
-    transcribed_with_dashes = '-'.join(transcribed[i:i+3] for i in range(0, len(transcribed), 3))
-    print(transcribed_with_dashes)
+    print(transcribed)
