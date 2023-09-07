@@ -11,7 +11,7 @@ def transcription(dna):
     return ''.join(transcribed_dna)
 
 if __name__ == "__main__":
-    dna_input = input().strip()
+    dna_input = input()
     dna_cleaned = ''.join(base for base in dna_input if base in 'ACTG')
     transcribed = transcription(dna_cleaned)
     print(transcribed)

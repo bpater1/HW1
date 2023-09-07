@@ -27,6 +27,9 @@ def optimize_mrna_sequence(amino_acid_sequence):
         codons.sort(key=lambda codon: (-codon.count("C"), -codon.count("G"), codon))
         return codons[0]
 
+    # Convert the input amino acid sequence to uppercase
+    amino_acid_sequence = amino_acid_sequence.upper()
+
     mrna_sequence = ""
     for amino_acid in amino_acid_sequence:
         mrna_sequence += find_optimal_codon(amino_acid)
