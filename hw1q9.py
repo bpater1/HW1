@@ -25,8 +25,8 @@ def optimize_mrna_sequence(amino_acid_sequence):
     optimized_mrna = ""
     for amino_acid in amino_acid_sequence:
         codons = codon_table.get(amino_acid, [""])  # Get possible codons for the amino acid
-        # Choose the codon that maximizes Cs and Gs
-        optimal_codon = max(codons, key=lambda codon: codon.count("C") + codon.count("G"))
+        # Choose the codon that maximizes Cs and Gs and is lexicographically first
+        optimal_codon = min(codons, key=lambda codon: (-codon.count("C") - codon.count("G"), codon))
         optimized_mrna += optimal_codon
 
     return optimized_mrna
