@@ -2,7 +2,7 @@ import sys
 
 output = []
 for ln in sys.stdin:
-    for c in ln:
-        if c.upper() in 'ACGT':
-            output.append(c.upper())
+  for c in ln:
+    if c in 'ACGT':
+      output.append(c)
 sys.stdout.write(''.join(output) + '\n')
