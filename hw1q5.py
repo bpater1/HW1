@@ -4,7 +4,19 @@ def translate_rna_codon(codon, codon_table):
             return amino_acid
     return None
 
-def count_amino_acids(rna_sequence):
+def count_amino_acids(rna_sequence, codon_table):
+    amino_acid_counts = {amino_acid: 0 for amino_acid in codon_table.keys()}
+    codon_length = 3
+
+    for i in range(0, len(rna_sequence), codon_length):
+        codon = rna_sequence[i:i + codon_length]
+        amino_acid = translate_rna_codon(codon, codon_table)
+        if amino_acid is not None:
+            amino_acid_counts[amino_acid] += 1
+
+    return amino_acid_counts
+
+if __name__ == "__main__":
     codon_table = {
         "A": ["GCU", "GCC", "GCA", "GCG"],
         "C": ["UGU", "UGC"],
@@ -28,20 +40,8 @@ def count_amino_acids(rna_sequence):
         "Y": ["UAU", "UAC"],
     }
 
-    amino_acid_counts = {amino_acid: 0 for amino_acid in codon_table.keys()}
-    codon_length = 3
-
-    for i in range(0, len(rna_sequence), codon_length):
-        codon = rna_sequence[i:i + codon_length]
-        amino_acid = translate_rna_codon(codon, codon_table)
-        if amino_acid is not None:
-            amino_acid_counts[amino_acid] += 1
-
-    return amino_acid_counts
-
-if __name__ == "__main__":
     rna_sequence = input().upper()
-    amino_acid_counts = count_amino_acids(rna_sequence)
+    amino_acid_counts = count_amino_acids(rna_sequence, codon_table)
 
     counts = [amino_acid_counts[acid] for acid in codon_table.keys()]
     result = ",".join(map(str, counts))
